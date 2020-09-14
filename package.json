@@ -27,6 +27,8 @@
     },
     "dependencies": {
         "react-icons": "^3.11.0",
+        "react-modal": "^3.11.2",
+        "react-reveal": "^1.2.2",
         "react-router-dom": "^5.2.0",
         "redux": "^4.0.5"
     }
