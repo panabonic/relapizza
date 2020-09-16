@@ -9,7 +9,7 @@ use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         return Product::all();
     }
 
