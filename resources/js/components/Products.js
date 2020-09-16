@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
-import formatCurrency from "../util";
 import Fade from "react-reveal/Fade";
-import Zoom from "react-reveal/Zoom";
-import Modal from "react-modal";
 import {connect} from "react-redux";
 import {fetchProducts} from "../actions/productActions";
+import Product from "./Product";
+import ProductModal from "./ProductModal";
 
 class Products extends Component {
     constructor(props) {
@@ -29,63 +28,22 @@ class Products extends Component {
         const {product} = this.state;
         return (
             <div>
-                <Fade bottom cascade>
-                    {
-                        !this.props.products ? <div>Loading...</div>:
-                        (<ul className="products">
-                        {this.props.products.map(product => (
-                            <li key={product.id}>
-                                <div className="product">
-                                    <a href={"#" + product.id} onClick={() => this.openModal(product)}>
-                                        <img src={product.image} alt={product.title} />
-                                        <p>{product.title}</p>
-                                    </a>
-                                    <div className="product-price">
-                                        <div>{formatCurrency(product.price)}</div>
-                                        <button onClick={() => this.props.addToCart(product)} className="button primary">Add to cart</button>
-                                    </div>
-                                </div>
-                            </li>
-                        ))}
-                        </ul>)
-                    }
-                </Fade>
-                {product && (
-                    <Modal isOpen={true} onReqestClose={this.closeModal}>
-                        <Zoom>
-                            <button className="close-modal" onClick={this.closeModal}>x</button>
-                            <div className="product-details">
-                                <img src={product.image} alt={product.title} />
-                                <div className="product-details-description">
-                                    <p>
-                                        <strong>{product.title}</strong>
-                                    </p>
-                                    <p>
-                                        {product.description}
-                                    </p>
-                                    <p>
-                                        Available Sizes:{" "}
-                                        {product.availableSizes.map(x => (
-                                            <span> { " " } <button className="button">{x}</button></span>
-                                        ))}
-                                    </p>
-                                    <div className="product-price">
-                                        <div>{ formatCurrency(product.price) }</div>
-                                        <button className="button primary" onClick={() => {
-                                            this.props.addToCart(product);
-                                            this.closeModal();
-                                        }}>Add to cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </Zoom>
-                    </Modal>
-                )}
+                {
+                    !this.props.products ? <div>Loading...</div>:
+                    (<ul className="products">
+                    {this.props.products.map(product => (
+                        <Product key={product.id} product={product} openModal={this.openModal} />
+                    ))}
+                    </ul>)
+                }
+                {product && (<ProductModal product={product} closeModal={this.closeModal} />)}
             </div>
         );
     }
 }
 
-export default connect((state) => ({products: state.products.filteredItems}), {
+export default connect((state) => ({
+    products: state.products.filteredItems
+}), {
     fetchProducts,
 })(Products);
