@@ -14,12 +14,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
+
+Route::get( '/{path?}', function () {
     return view('index');
 });
-
-
-
-Auth::routes();
-
-Route::get('/home', [HomeController::class, 'index'])->name('home');
