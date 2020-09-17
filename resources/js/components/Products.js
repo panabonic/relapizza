@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import Fade from "react-reveal/Fade";
 import {connect} from "react-redux";
-import {fetchProducts} from "../actions/productActions";
+import {fetchProducts, switchCurrency} from "../actions/productActions";
 import Product from "./Product";
 import ProductModal from "./ProductModal";
 
@@ -43,7 +42,7 @@ class Products extends Component {
 }
 
 export default connect((state) => ({
-    products: state.products.filteredItems
+    products: state.products.items
 }), {
-    fetchProducts,
+    fetchProducts
 })(Products);

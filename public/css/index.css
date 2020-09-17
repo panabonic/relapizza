@@ -95,6 +95,9 @@ footer {
 .product img {
     max-width: 37rem;
     max-height: 37rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.13) 0px 1px 2px;
 }
 .product-price {
     display: flex;
@@ -114,6 +117,7 @@ footer {
     border: 0.1rem #c0c0c0 solid;
     background-color: #f0f0f0;
     cursor: pointer;
+    border-radius: 0.5rem;
 }
 .button:hover {
     border: 0.1rem #808080 solid;
@@ -140,7 +144,6 @@ footer {
 .cart {
     padding: 1rem;
     margin: 1rem;
-    display: flex;
 }
 .cart-header {
     border-bottom: 0.1rem #c0c0c0 solid;
@@ -170,6 +173,11 @@ footer {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+}
+.delivery-price {
+    margin-bottom:2rem;
+    padding-bottom:1rem;
+    border-bottom: #dedede solid 1px;
 }
 .total > div {
     font-size: 2rem;

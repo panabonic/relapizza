@@ -16,7 +16,7 @@ class Product extends Component {
                             <p>{product.title}</p>
                         </a>
                         <div className="product-price">
-                            <div>{formatCurrency(product.price)}</div>
+                            <div>{formatCurrency(product.price, this.props.currency)}</div>
                             <button onClick={() => this.props.addToCart(product)} className="button primary">Add to cart</button>
                         </div>
                     </div>
@@ -27,7 +27,7 @@ class Product extends Component {
 }
 
 export default connect((state) => ({
-    //products: state.products.filteredItems
+    currency: state.products.currency
 }), {
     addToCart
 })(Product);
