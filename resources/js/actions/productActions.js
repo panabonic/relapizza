@@ -1,4 +1,4 @@
-import {FETCH_PRODUCTS, FILTER_PRODUCTS_BY_SIZE, ORDER_PRODUCTS_BY_PRICE} from "../types";
+import {FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, SWITCH_CURRENCY} from "../types";
 
 export const fetchProducts = () => async(dispatch) => {
     const res = await fetch('/api/products');
@@ -9,15 +9,14 @@ export const fetchProducts = () => async(dispatch) => {
     });
 }
 
-export const filterProducts = (products, size) => (dispatch) => {
+export const switchCurrency = (currency) => (dispatch) => {
     dispatch({
-        type: FILTER_PRODUCTS_BY_SIZE,
+        type: SWITCH_CURRENCY,
         payload: {
-            size: size,
-            items: products
-            //items: size === "" ? products : products.filter(x => x.availableSizes.indexOf(size) >= 0)
+            currency: currency,
         }
     });
+    localStorage.setItem('currency', currency);
 }
 
 export const sortProducts = (filteredProducts, sort) => (dispatch) => {

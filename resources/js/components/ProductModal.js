@@ -32,7 +32,7 @@ class ProductModal extends Component {
                                 ))}
                             </p>
                             <div className="product-price">
-                                <div>{ formatCurrency(product.price) }</div>
+                                <div>{ formatCurrency(product.price, this.props.currency) }</div>
                                 <button className="button primary" onClick={() => {
                                     this.props.addToCart(product);
                                     this.props.closeModal();
@@ -47,7 +47,7 @@ class ProductModal extends Component {
 }
 
 export default connect((state) => ({
-    //products: state.products.filteredItems
+    currency: state.products.currency
 }), {
     addToCart
 })(ProductModal);

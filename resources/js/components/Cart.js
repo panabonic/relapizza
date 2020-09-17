@@ -14,6 +14,7 @@ class Cart extends Component {
             name: "",
             email: "",
             address: "",
+            deliveryPrice: 5,
             showCheckout: false
         };
     }
@@ -29,7 +30,12 @@ class Cart extends Component {
             email: this.state.email,
             address: this.state.address,
             cartItems: this.props.cartItems,
-            total: this.props.cartItems.reduce((a,c) => (a + c.price * c.count), 0),
+            delivery_price: formatCurrency(this.state.deliveryPrice, this.props.currency, true),
+            total: formatCurrency(this.props.cartItems.reduce((a,c) => (a + c.price * c.count),
+                this.state.deliveryPrice),
+                this.props.currency,
+                true),
+            currency: this.props.currency,
         }
         this.props.createOrder(order);
     }
@@ -53,7 +59,9 @@ class Cart extends Component {
 
                 {
                     order && (
-                        <Modal isOpen={true} onRequestClose={this.closeModal}>
+                        <Modal isOpen={true}
+                               onRequestClose={this.closeModal}
+                               appElement={document.getElementById('app')}>
                             <Zoom>
                                 <button className="close-modal" onClick={this.closeModal}>x</button>
                                 <div className="order-details">
@@ -73,8 +81,12 @@ class Cart extends Component {
                                             <div>{order.address}</div>
                                         </li>
                                         <li>
+                                            <div>Delivery price:</div>
+                                            <div>{formatCurrency(order.delivery_price, this.props.currency, false, true)}</div>
+                                        </li>
+                                        <li>
                                             <div>Total:</div>
-                                            <div>{formatCurrency(order.total)}</div>
+                                            <div>{formatCurrency(order.total, this.props.currency, false, true)}</div>
                                         </li>
                                         <li>
                                             <div>Cart items:</div>
@@ -100,7 +112,7 @@ class Cart extends Component {
                                     <div>
                                         <div>{item.title}</div>
                                         <div className="right">
-                                            {formatCurrency(item.price)} x {item.count}{" "}
+                                            {formatCurrency(item.price, this.props.currency)} x {item.count}{" "}
                                             <button onClick={() => this.props.removeFromCart(item)}>Remove</button>
                                         </div>
                                     </div>
@@ -111,11 +123,14 @@ class Cart extends Component {
                 </div>
                 {cartItems.length !== 0 && (
                     <div className="cart">
+                        <div className="delivery-price">
+                            Delivery price: {formatCurrency(this.state.deliveryPrice, this.props.currency)}
+                        </div>
                         <div className="total">
                             <div>
                                 Total:{" "}
                                 {formatCurrency(
-                                    cartItems.reduce((a, c) => a + c.price * c.count, 0))
+                                    cartItems.reduce((a, c) => a + c.price * c.count, this.state.deliveryPrice), this.props.currency)
                                 }
                             </div>
                             <button onClick={() => {
@@ -157,6 +172,7 @@ class Cart extends Component {
 export default connect((state) => ({
     order: state.order.order,
     cartItems: state.cart.cartItems,
+    currency: state.products.currency,
 }), {
     removeFromCart,
     createOrder,

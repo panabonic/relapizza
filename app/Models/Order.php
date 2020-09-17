@@ -12,7 +12,7 @@ class Order extends Model
     protected $table = 'orders';
 
     protected $fillable = [
-        'customer_name', 'customer_email', 'delivery_address', 'total_price'
+        'name', 'email', 'address', 'delivery_price', 'total', 'currency'
     ];
 
 
@@ -33,8 +33,9 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function products() {
-        return $this->belongsToMany(Product::class);
+    public function cartItems() {
+        return $this->hasMany(CartItem::class);
     }
+
 
 }
