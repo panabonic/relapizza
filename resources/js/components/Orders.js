@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchOrders } from "../actions/orderActions";
 import formatCurrency from "../util";
@@ -7,12 +8,16 @@ class Orders extends Component {
     componentDidMount() {
         this.props.fetchOrders();
     }
-    render() {
+    render() {console.log(this.props.token);
         const { orders } = this.props;
         return !orders ? (
-            <div>Orders</div>
+            <div>
+                {!this.props.token && <Redirect to="/" />}
+                <div>You does not have orders yet.</div>
+            </div>
         ) : (
             <div className="orders">
+                {!this.props.token && <Redirect to="/" />}
                 <h2>Orders</h2>
                 <table>
                     <thead>
@@ -52,6 +57,7 @@ class Orders extends Component {
 }
 export default connect((state) => ({
     orders: state.order.orders,
+    token: state.auth.token
 }), {
     fetchOrders,
 }

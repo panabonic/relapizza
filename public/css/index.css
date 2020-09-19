@@ -4,6 +4,7 @@ html {
     font-size: 62.5%;
     box-sizing: border-box;
 }
+div {box-sizing:border-box;}
 body,
 #app {
     height: 100vh;
@@ -260,6 +261,9 @@ input {
     width: 100%;
     padding: 10px;
 }
+.orders table {
+    width: 100%;
+}
 tbody > tr:nth-child(odd) {
     background-color: #f0f0f0;
 }
@@ -279,6 +283,7 @@ th {
 }
 
 .auth-form {
+    width: 40rem;
     margin: auto;
     padding: 2rem;
     background-color: #fafbfc;
@@ -295,6 +300,12 @@ th {
     margin-bottom: 2rem;
 }
 
+.auth-form .field input {
+    width:100%;
+    box-sizing:border-box;
+}
+
+
 .auth-form label {
     display: block;
 }
@@ -306,6 +317,12 @@ th {
 .auth-form .form-bottom {
     margin-top:2rem;
     text-align: center;
+}
+
+.auth-form .error-message {
+    font-size:1.4rem;
+    color:#f44336;
+    margin-bottom:1rem;
 }
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(LoginRequest $request) {
+        if (Auth::attempt($request->validated())) {
+            $user = Auth::user();
+            return response()->json([
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'token' => $user['api_token']
+            ], 200);
+        } else {
+            return response()->json(['message' => 'The given data was invalid. Please, try again.'], 422);
+        }
+    }
+
 }

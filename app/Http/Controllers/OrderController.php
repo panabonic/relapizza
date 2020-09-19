@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Models\CartItem;
 use App\Models\Order;
-use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function index(Request $request) {
-        $builder = Order::with(['cartItems', 'user']);
-        if ($user = $request->user()) $builder->where('user_id', $user->id);
-        return $builder->get();
+        $result = [];
+        if ($user = $request->user()) {
+            $builder = Order::with(['cartItems', 'user']);
+            $builder->where('user_id', $user->id);
+            $result = $builder->get();
+        }
+        return $result;
     }
 
     public function store(OrderRequest $request) {
@@ -29,6 +33,8 @@ class OrderController extends Controller
             ]);
             $order->cartItems()->save($cartItem);
         }
+        if ($user = Auth::guard('api')->user()) $user->orders()->save($order);
+
         return $request->input();
     }
 

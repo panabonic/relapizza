@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import OrdersScreen from "./screens/OrdersScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import Header from "./components/Header";
 
 class App extends React.Component {
     render() {
@@ -13,11 +14,7 @@ class App extends React.Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <div className="grid-container">
-                        <header>
-                            <Link className="logo" to="/">RelaPizza</Link>
-                            <Link to="/login">Login</Link>
-                            <Link to="/orders">My orders</Link>
-                        </header>
+                        <Header />
                         <main>
                             <Route path="/orders" component={OrdersScreen} />
                             <Route path="/login" component={LoginScreen} />

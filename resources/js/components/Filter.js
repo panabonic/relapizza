@@ -22,7 +22,6 @@ class Filter extends Component {
                         <option value="euro">EUR</option>
                         <option value="gbp">GBP</option>
                     </select>
-                    {console.log(this.props.currency)}
                 </div>
             </div>
         );
