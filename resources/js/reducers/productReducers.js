@@ -1,7 +1,7 @@
 import {FETCH_PRODUCTS, ORDER_PRODUCTS_BY_PRICE, SWITCH_CURRENCY} from "../types";
 
 export const productsReducer = (
-    state = {currency: localStorage.getItem('currency')},
+    state = {currency: localStorage.getItem('currency') || 'usd'},
     action) => {
     switch (action.type) {
         case SWITCH_CURRENCY:

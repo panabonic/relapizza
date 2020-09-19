@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import RegisterForm from "../components/RegisterForm";
 
 class RegisterScreen extends Component {
     render() {
@@ -7,27 +8,9 @@ class RegisterScreen extends Component {
             <div className="form-center">
                 <div className="auth-form">
                     <div className="form-title">Register</div>
-                    <div className="form-fields">
-                        <div className="field">
-                            <label>Name</label>
-                            <input type="text" name="email" />
-                        </div>
-                        <div className="field">
-                            <label>Email</label>
-                            <input type="text" name="email" />
-                        </div>
-                        <div className="field">
-                            <label>Password</label>
-                            <input type="password" name="password" />
-                        </div>
-                        <div className="field">
-                            <label>Password confirmation</label>
-                            <input type="password" name="password" />
-                        </div>
-                        <button type="submit" className="button primary">Proceed</button>
-                    </div>
+                    <RegisterForm />
                     <div className="form-bottom">
-                        <Link to="/login">Already have account?</Link>
+                        <Link to="/login">Already have account? Login</Link>
                     </div>
                 </div>
             </div>

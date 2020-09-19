@@ -11,8 +11,8 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            email: "",
+            name: localStorage.getItem('userName') || "",
+            email: localStorage.getItem('userEmail') || "",
             address: "",
             deliveryPrice: 5,
             showCheckout: false
@@ -146,11 +146,11 @@ class Cart extends Component {
                                 <ul className="form-container">
                                     <li>
                                         <label>Email</label>
-                                        <input type="email" name="email" required onChange={this.handleInput}/>
+                                        <input type="email" name="email" value={this.state.email} required onChange={this.handleInput}/>
                                     </li>
                                     <li>
                                         <label>Name</label>
-                                        <input type="text" name="name" required onChange={this.handleInput}/>
+                                        <input type="text" name="name" value={this.state.name} required onChange={this.handleInput}/>
                                     </li>
                                     <li>
                                         <label>Address</label>
