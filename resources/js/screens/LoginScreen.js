@@ -7,10 +7,10 @@ class LoginScreen extends Component {
         return (
             <div className="form-center">
                 <div className="auth-form">
-                    <div className="form-title">Login</div>
+                    <div className="form-title">Welocme! Please, Log in</div>
                     <LoginForm />
                     <div className="form-bottom">
-                        <Link to="/register">Don't have an account? Sign up</Link>
+                        <Link to="/register">Don't have an account yet? Sign up</Link>
                     </div>
                 </div>
             </div>
