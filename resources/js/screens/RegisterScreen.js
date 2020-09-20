@@ -7,10 +7,10 @@ class RegisterScreen extends Component {
         return (
             <div className="form-center">
                 <div className="auth-form">
-                    <div className="form-title">Register</div>
+                    <div className="form-title">Welcome! Please, sign up</div>
                     <RegisterForm />
                     <div className="form-bottom">
-                        <Link to="/login">Already have account? Login</Link>
+                        <Link to="/login">Already have an account? Log in</Link>
                     </div>
                 </div>
             </div>

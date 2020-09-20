@@ -21,7 +21,7 @@ class App extends React.Component {
                             <Route path="/register" component={RegisterScreen} />
                             <Route path="/" component={HomeScreen} exact />
                         </main>
-                        <footer>All right is reserved.</footer>
+                        <footer>Test task for Innoscripta.</footer>
                     </div>
                 </BrowserRouter>
             </Provider>
